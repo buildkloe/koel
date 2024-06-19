@@ -1,0 +1,40 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - ship
+
+env:
+  IMAGE_NAME: koel
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+          echo $IMAGE_NAME
+          echo ${REGISTRY}/${IMAGE_NAME}:${{github.sha}}
+          cd laravel
+          docker pull ${REGISTRY}/${IMAGE_NAME}:latest || true
+          docker build . -f ./docker-files/Dockerfile --tag ${IMAGE_NAME}:latest --cache-from ${REGISTRY}/${IMAGE_NAME}:latest --build-arg CI_COMMIT_SHA=${{github.sha}} --build-arg CI_COMMIT_DATE="$(date)"
+          docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:latest
+          docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:${{github.sha}}
+      - name: Push to repository
+        run: |
+          docker push ${REGISTRY}/${IMAGE_NAME}:${{github.sha}}
+          docker push ${REGISTRY}/${IMAGE_NAME}:latest
+          docker logout
