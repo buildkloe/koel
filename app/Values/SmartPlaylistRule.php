@@ -41,6 +41,7 @@ final class SmartPlaylistRule implements Arrayable
     public const MODEL_ARTIST_NAME = 'artist.name';
     private const MODEL_PLAY_COUNT = 'interactions.play_count';
     public const MODEL_LAST_PLAYED = 'interactions.last_played_at';
+    public const MODEL_LIKED = 'interactions.liked';
     private const MODEL_USER_ID = 'interactions.user_id';
     private const MODEL_LENGTH = 'length';
     public const MODEL_DATE_ADDED = 'created_at';
@@ -54,6 +55,7 @@ final class SmartPlaylistRule implements Arrayable
         self::MODEL_ARTIST_NAME,
         self::MODEL_PLAY_COUNT,
         self::MODEL_LAST_PLAYED,
+        self::MODEL_LIKED,
         self::MODEL_LENGTH,
         self::MODEL_DATE_ADDED,
         self::MODEL_DATE_MODIFIED,

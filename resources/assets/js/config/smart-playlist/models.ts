@@ -28,6 +28,10 @@ const models: SmartPlaylistModel[] = [
     type: 'date',
     label: 'Last Played'
   }, {
+    name: 'interactions.liked',
+    type: 'number',
+    label: 'Liked'
+  }, {
     name: 'length',
     type: 'number',
     label: 'Length',

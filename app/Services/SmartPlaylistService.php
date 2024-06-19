@@ -18,7 +18,6 @@ class SmartPlaylistService
     public function getSongs(Playlist $playlist, ?User $user = null): Collection
     {
         throw_unless($playlist->is_smart, NonSmartPlaylistException::create($playlist));
-
         $query = Song::query()->withMeta($user ?? $playlist->user);
 
         $playlist->rule_groups->each(static function (RuleGroup $group, int $index) use ($query): void {
