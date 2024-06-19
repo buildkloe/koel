@@ -28,7 +28,6 @@ jobs:
         run: |
           echo $IMAGE_NAME
           echo ${REGISTRY}/${IMAGE_NAME}:${{github.sha}}
-          cd laravel
           docker pull ${REGISTRY}/${IMAGE_NAME}:latest || true
           docker build . -f ./docker-files/Dockerfile --tag ${IMAGE_NAME}:latest --cache-from ${REGISTRY}/${IMAGE_NAME}:latest --build-arg CI_COMMIT_SHA=${{github.sha}} --build-arg CI_COMMIT_DATE="$(date)"
           docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:latest
