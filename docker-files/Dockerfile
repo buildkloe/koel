@@ -2,14 +2,14 @@
 FROM php:8.1.8-apache-buster
 
 # The koel version to download
-ARG KOEL_VERSION_REF=v6.12.1
+ARG KOEL_VERSION_REF=v6.12.1-custom
 
 # Install vim for easier editing/debugging
 RUN apt-get update && apt-get install -y vim
 
 # Download the koel release matching the version and remove anything not necessary for production
-RUN curl -L https://github.com/buildkloe/koel/archive/refs/heads/master.tar.gz | tar -xz -C /tmp \
-  && cd /tmp && mv koel-master koel \
+RUN curl -L https://github.com/buildkloe/koel/releases/download/${KOEL_VERSION_REF}/koel-${KOEL_VERSION_REF}.tar.gz | tar -xz -C /tmp \
+  && cd /tmp/koel/ \
   && cd /tmp/koel/ \
   && rm -rf .editorconfig \
     .eslintignore \
