@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(static function (): void {
     Route::get('/', static fn () => view('index'));
+    Route::get('/car', static fn () => view('carplay'));
 
     Route::get('remote', static fn () => view('remote'));
 

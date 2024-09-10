@@ -291,6 +291,7 @@ class PlaybackService {
     }
 
     try {
+      console.log("Try play")
       await this.player.media.play()
     } catch (error) {
       logger.error(error)
