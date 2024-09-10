@@ -293,7 +293,11 @@ class PlaybackService {
     try {
       await this.player.media.play()
     } catch (error) {
-      logger.error(error)
+      try {
+      await this.player.media.play()
+      } catch (error) {
+        logger.error(error)
+      }
     }
 
     queueStore.current!.playback_state = 'Playing'
