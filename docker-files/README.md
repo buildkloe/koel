@@ -18,8 +18,8 @@ Update Dockerfile by changing the ARG KOEL_VERSION_REF=v6.12.1-liked-pl
 
 git push
 
-## Depploy
+## Deploy
 
-Go to appfx 
+Go to appfx
 ship pull && ship stop && ship up -d
 
