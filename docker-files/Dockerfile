@@ -2,7 +2,7 @@
 FROM php:8.1.8-apache-buster
 
 # The koel version to download
-ARG KOEL_VERSION_REF=v6.12.1-liked-pl
+ARG KOEL_VERSION_REF=v6.12.1-delay-toggle
 
 # Install vim for easier editing/debugging
 RUN apt-get update && apt-get install -y vim
