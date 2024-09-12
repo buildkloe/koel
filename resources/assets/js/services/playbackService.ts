@@ -261,9 +261,14 @@ class PlaybackService {
     } else {
       this.next && await this.play(this.next)
       await delay(1500)
-      await playbackService.toggle()
+      console.log(queueStore.current!.playback_state)
+      await this.player.media.play()
       await delay(1500)
-      await playbackService.toggle()
+      console.log(queueStore.current!.playback_state)
+      await this.player.media.play()
+      await delay(1500)
+      console.log(queueStore.current!.playback_state)
+      await this.player.media.play()
     }
   }
 
