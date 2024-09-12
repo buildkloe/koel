@@ -20,6 +20,11 @@ import { audioService, http, socketService, volumeManager } from '@/services'
  */
 const PRELOAD_BUFFER = 30
 
+function delay(ms) {
+  console.log(`Delaying ${ms}ms`)
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class PlaybackService {
   public player!: Plyr
   private repeatModes: RepeatMode[] = ['NO_REPEAT', 'REPEAT_ALL', 'REPEAT_ONE']
@@ -250,10 +255,15 @@ class PlaybackService {
    * If the next song is not found and the current mode is NO_REPEAT, we stop completely.
    */
   public async playNext () {
+    console.log('try playNext');
     if (!this.next && preferences.repeatMode === 'NO_REPEAT') {
       await this.stop() //  Nothing lasts forever, even cold November rain.
     } else {
       this.next && await this.play(this.next)
+      await delay(1500)
+      await playbackService.toggle()
+      await delay(1500)
+      await playbackService.toggle()
     }
   }
 
@@ -293,11 +303,7 @@ class PlaybackService {
     try {
       await this.player.media.play()
     } catch (error) {
-      try {
-      await this.player.media.play()
-      } catch (error) {
-        logger.error(error)
-      }
+      logger.error(error)
     }
 
     queueStore.current!.playback_state = 'Playing'
@@ -307,6 +313,7 @@ class PlaybackService {
   }
 
   public async toggle () {
+    console.log('toggle');
     if (!queueStore.current) {
       await this.playFirstInQueue()
       return
