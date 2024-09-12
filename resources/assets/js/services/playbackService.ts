@@ -25,6 +25,11 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const report = async function(message: string){
+  console.log(message)
+  return await http.post('report', { message})
+}
+
 class PlaybackService {
   public player!: Plyr
   private repeatModes: RepeatMode[] = ['NO_REPEAT', 'REPEAT_ALL', 'REPEAT_ONE']
@@ -255,19 +260,19 @@ class PlaybackService {
    * If the next song is not found and the current mode is NO_REPEAT, we stop completely.
    */
   public async playNext () {
-    console.log('try playNext');
+    report(`About to play next : ${this.next?.artist_name} - ${this.next?.title} ` )
     if (!this.next && preferences.repeatMode === 'NO_REPEAT') {
       await this.stop() //  Nothing lasts forever, even cold November rain.
     } else {
       this.next && await this.play(this.next)
+      report(`Song [${queueStore.current?.artist_name} - ${queueStore.current?.title}] Playback state [${queueStore.current!.playback_state}], delay 1.5s and retry`)
       await delay(1500)
-      console.log(queueStore.current!.playback_state)
       await this.player.media.play()
+      report(`Song [${queueStore.current?.artist_name} - ${queueStore.current?.title}] Playback state [${queueStore.current!.playback_state}], delay 1.5s and retry`)
       await delay(1500)
-      console.log(queueStore.current!.playback_state)
       await this.player.media.play()
+      report(`Song [${queueStore.current?.artist_name} - ${queueStore.current?.title}] Playback state [${queueStore.current!.playback_state}], delay 1.5s and retry`)
       await delay(1500)
-      console.log(queueStore.current!.playback_state)
       await this.player.media.play()
     }
   }
@@ -318,7 +323,7 @@ class PlaybackService {
   }
 
   public async toggle () {
-    console.log('toggle');
+    report(`Toggle Song [${queueStore.current?.artist_name} - ${queueStore.current?.title}] Playback state before [${queueStore.current!.playback_state}]`)
     if (!queueStore.current) {
       await this.playFirstInQueue()
       return
@@ -329,6 +334,7 @@ class PlaybackService {
       return
     }
 
+    report(`Toggle Song [${queueStore.current?.artist_name} - ${queueStore.current?.title}] Playback state after [${queueStore.current!.playback_state}]`)
     this.pause()
   }
 

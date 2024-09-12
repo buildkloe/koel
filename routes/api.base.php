@@ -155,6 +155,10 @@ Route::prefix('api')->middleware('api')->group(static function (): void {
 
         Route::post('invitations', [UserInvitationController::class, 'invite']);
         Route::delete('invitations', [UserInvitationController::class, 'revoke']);
+
+        Route::post('report', static function (): void {
+            Log::info(request()->json()->get('message'));
+        });
     });
 
     // Object-storage (S3) routes
