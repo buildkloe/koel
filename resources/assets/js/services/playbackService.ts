@@ -388,7 +388,10 @@ class PlaybackService {
   }
 
   private listenToMediaEvents (media: HTMLMediaElement) {
-    media.addEventListener('error', () => this.playNext(), true)
+    media.addEventListener('error', (e) => {
+      report(JSON.stringfy(e))
+      this.playNext()
+    }, true)
 
     media.addEventListener('ended', () => {
       if (commonStore.state.use_last_fm && userStore.current.preferences!.lastfm_session_key) {
