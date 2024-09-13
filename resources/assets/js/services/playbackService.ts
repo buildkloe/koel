@@ -389,7 +389,7 @@ class PlaybackService {
 
   private listenToMediaEvents (media: HTMLMediaElement) {
     media.addEventListener('error', (e) => {
-      report(JSON.stringfy(e))
+      report(JSON.stringify(e))
       this.playNext()
     }, true)
 
