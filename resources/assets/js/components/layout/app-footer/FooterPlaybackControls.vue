@@ -25,6 +25,7 @@ import { ref } from 'vue'
 import { playbackService } from '@/services'
 import { requireInjection } from '@/utils'
 import { CurrentSongKey } from '@/symbols'
+import { report } from '@/services/playbackService'
 
 import RepeatModeSwitch from '@/components/ui/RepeatModeSwitch.vue'
 import LikeButton from '@/components/song/SongLikeButton.vue'
@@ -33,7 +34,10 @@ import PlayButton from '@/components/ui/FooterPlayButton.vue'
 const song = requireInjection(CurrentSongKey, ref())
 
 const playPrev = async () => await playbackService.playPrev()
-const playNext = async () => await playbackService.playNext()
+const playNext = async () => {
+  report('playNext from button')
+  await playbackService.playNext()
+}
 </script>
 
 <style lang="scss" scoped>

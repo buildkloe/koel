@@ -13,6 +13,7 @@ import { GlobalEvents } from 'vue-global-events'
 import { eventBus } from '@/utils'
 import { playbackService, socketService } from '@/services'
 import { favoriteStore, queueStore } from '@/stores'
+import { report } from '@/services/playbackService'
 
 const togglePlayback = (e: KeyboardEvent) => {
   if (
@@ -52,6 +53,7 @@ const playNext = (e: KeyboardEvent) => {
   }
 
   e.preventDefault()
+  report('playNext from hotkey')
   playbackService.playNext()
 
   return false

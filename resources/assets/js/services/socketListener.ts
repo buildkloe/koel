@@ -1,11 +1,15 @@
 import { playbackService, socketService, volumeManager } from '@/services'
 import { favoriteStore, queueStore } from '@/stores'
+import { report } from '@/services/playbackService'
 
 export const socketListener = {
   listen: () => {
     socketService
       .listen('SOCKET_TOGGLE_PLAYBACK', () => playbackService.toggle())
-      .listen('SOCKET_PLAY_NEXT', () => playbackService.playNext())
+      .listen('SOCKET_PLAY_NEXT', () => {
+        report('playNext from socket')
+        playbackService.playNext()
+      })
       .listen('SOCKET_PLAY_PREV', () => playbackService.playPrev())
       .listen('SOCKET_GET_STATUS', () => {
         socketService.broadcast('SOCKET_STATUS', {

@@ -55,6 +55,7 @@ import { eventBus, logger, pluralize } from '@/utils'
 import { commonStore, queueStore, songStore } from '@/stores'
 import { localStorageService as storage, playbackService } from '@/services'
 import { useDialogBox, useRouter, useSongList } from '@/composables'
+import { report } from '@/services/playbackService'
 
 import ScreenHeader from '@/components/ui/ScreenHeader.vue'
 import ScreenEmptyState from '@/components/ui/ScreenEmptyState.vue'
@@ -115,6 +116,7 @@ const removeSelected = () => {
   queueStore.unqueue(selectedSongs.value)
 
   if (currentSongId && selectedSongs.value.find(song => song.id === currentSongId)) {
+    report('playNext from queueScreen')
     playbackService.playNext()
   }
 }
