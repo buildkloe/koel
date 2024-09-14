@@ -76,6 +76,7 @@ class PlaybackService {
       logger.warn('Attempted to play a deleted song', song)
 
       if (this.next && this.next.id !== song.id) {
+        report('playNext from deleted song')
         await this.playNext()
       }
 
@@ -367,7 +368,10 @@ class PlaybackService {
     navigator.mediaSession.setActionHandler('pause', () => this.pause())
     navigator.mediaSession.setActionHandler('stop', () => this.stop())
     navigator.mediaSession.setActionHandler('previoustrack', () => this.playPrev())
-    navigator.mediaSession.setActionHandler('nexttrack', () => this.playNext())
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      report('play next from nexttrack');
+      this.playNext()
+    })
 
     navigator.mediaSession.setActionHandler('seekbackward', details => {
       this.player.media.currentTime -= (details.seekOffset || 10)
@@ -388,8 +392,12 @@ class PlaybackService {
   }
 
   private listenToMediaEvents (media: HTMLMediaElement) {
-    media.addEventListener('error', (e) => {
-      report(JSON.stringify(e))
+    media.addEventListener('error', (event) => {
+      report('playNext from media error')
+
+      const mediaError = event.target.error;
+      report(`error code ${mediaError.code}, error message ${mediaError.message}`)
+
       this.playNext()
     }, true)
 
@@ -398,6 +406,7 @@ class PlaybackService {
         songStore.scrobble(queueStore.current!)
       }
 
+      report('play next from ended');
       preferences.repeatMode === 'REPEAT_ONE' ? this.restart() : this.playNext()
     })
 
