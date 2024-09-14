@@ -441,9 +441,10 @@ class PlaybackService {
         return
       }
 
-      if (media.duration && media.currentTime + PRELOAD_BUFFER > media.duration) {
-        this.preload(nextSong)
-      }
+      // console.log('skip preload')
+      // if (media.duration && media.currentTime + PRELOAD_BUFFER > media.duration) {
+      //   this.preload(nextSong)
+      // }
     }
 
     if (process.env.NODE_ENV !== 'test') {
