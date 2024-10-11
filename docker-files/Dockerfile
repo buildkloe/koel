@@ -2,7 +2,7 @@
 FROM php:8.1.8-apache-buster
 
 # The koel version to download
-ARG KOEL_VERSION_REF=v6.12.2-fine-tune-font
+ARG KOEL_VERSION_REF=v6.12.2-fine-tune
 
 # Install vim for easier editing/debugging
 RUN apt-get update && apt-get install -y vim
