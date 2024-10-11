@@ -1,7 +1,7 @@
 <template>
   <button type="button" :class="playing ? 'playing' : 'stopped'" title="Play or resume" @click.prevent="toggle">
-    <Icon v-if="playing" :icon="faPause" />
-    <Icon v-else :icon="faPlay" />
+    <Icon v-if="playing" :icon="faPause" class="large-icon"/>
+    <Icon v-else :icon="faPlay" class="large-icon" />
   </button>
 </template>
 
@@ -55,7 +55,7 @@ const initiatePlayback = async () => {
 
 <style lang="scss" scoped>
 button {
-  width: 3rem !important;
+  width: 6rem !important;
   border-radius: 50%;
   border: 2px solid currentColor;
 
@@ -66,6 +66,10 @@ button {
   &:hover {
     border-color: var(--color-text-primary) !important;
     transform: scale(1.2);
+  }
+
+  .large-icon {
+    font-size: 1.8rem;
   }
 }
 </style>

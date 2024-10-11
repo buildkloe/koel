@@ -5,13 +5,13 @@
       <button v-else type="button" /> <!-- a placeholder to maintain the flex layout -->
 
       <button type="button" title="Play previous song" @click.prevent="playPrev">
-        <Icon :icon="faStepBackward" />
+        <Icon :icon="faStepBackward" class="large-icon"/>
       </button>
 
       <PlayButton />
 
       <button type="button" title="Play next song" @click.prevent="playNext">
-        <Icon :icon="faStepForward" />
+        <Icon :icon="faStepForward" class="large-icon"/>
       </button>
 
       <RepeatModeSwitch class="repeat-mode-btn" />
@@ -58,7 +58,7 @@ const playNext = async () => {
   display: flex;
   place-content: center;
   place-items: center;
-  gap: 2rem;
+  gap: 3rem;
 
   @media screen and (max-width: 768px) {
     gap: .75rem;
@@ -78,6 +78,10 @@ const playNext = async () => {
 
     &.like-btn, &.repeat-mode-btn {
       font-size: 1rem;
+    }
+
+    .large-icon {
+      font-size: 2.4rem;
     }
   }
 }
