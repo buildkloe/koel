@@ -8,7 +8,7 @@
     @click.prevent="changeMode"
   >
     <FontAwesomeLayers>
-      <Icon :icon="faRepeat" style="font-size: 1.8rem" />
+      <Icon :icon="faRepeat" style="font-size: 1.6rem" />
       <FontAwesomeLayersText v-if="mode === 'REPEAT_ONE'" counter value="1" />
     </FontAwesomeLayers>
   </button>

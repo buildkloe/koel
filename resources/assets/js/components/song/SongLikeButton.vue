@@ -22,7 +22,7 @@ const toggleLike = () => favoriteStore.toggleOne(song.value)
 <style scoped>
   button {
     .large-icon {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
   }
 </style>

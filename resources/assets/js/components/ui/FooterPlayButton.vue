@@ -69,7 +69,7 @@ button {
   }
 
   .large-icon {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 }
 </style>

@@ -130,7 +130,7 @@ dialog {
       background: var(--color-bg-secondary);
 
       h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         line-height: 2.2rem;
         margin-bottom: .3rem;
       }

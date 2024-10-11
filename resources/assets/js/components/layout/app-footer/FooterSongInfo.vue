@@ -86,7 +86,7 @@ const cover = computed(() => song.value?.album_cover || defaultCover)
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.4rem;
     margin-bottom: .4rem;
     line-height: 1.2;
     font-weight: var(--font-weight-bold);
@@ -94,7 +94,7 @@ const cover = computed(() => song.value?.album_cover || defaultCover)
 
   .artist {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   &.playing .album-thumb {
