@@ -86,7 +86,7 @@ const cover = computed(() => song.value?.album_cover || defaultCover)
   }
 
   .title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-bottom: .4rem;
     line-height: 1.2;
     font-weight: var(--font-weight-bold);
