@@ -26,6 +26,9 @@ localhost:8000
 ## Release build
 
 git tag v6.12.1-skip-preload
-
 git push --tags
+publish release
+
+update
+ARG KOEL_VERSION_REF=v6.12.1-skip-preload
 
